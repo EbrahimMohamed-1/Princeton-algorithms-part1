@@ -11,7 +11,7 @@ Solve computational problems using the techniques learned throughout the course.
 1. **Programming Assignments**:
     * You will complete several coding assignments that require you to implement specific data structures and  algorithms. For example:
         * Implementing a Percolation model to understand network flow and connectivity.
-        * Working on randomized algorithms and implementing sorting algorithms like quicksort, mergesort and red-black BST.
+        * Working on randomized algorithms and implementing algorithms like red-black BST, quicksort and mergesort.
 <br/>
 
 2. **problem sets:**
@@ -23,7 +23,7 @@ Solve computational problems using the techniques learned throughout the course.
  <br/><br/> 
 
  4. **Peer Graded Assignments:**
-     * me assignments may involve peer review, where you submit your work and review submissions from other students. This process helps reinforce learning through feedback.          
+     * me assignments may involve peer review, where you submit your work and review submissions from The system. This process helps reinforce learning through feedback.          
     
 
 
