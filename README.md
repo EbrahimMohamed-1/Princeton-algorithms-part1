@@ -25,7 +25,10 @@ Solve computational problems using the techniques learned throughout the course.
  4. **Peer Graded Assignments:**
      * me assignments may involve peer review, where you submit your work and review submissions from The system. This process helps reinforce learning through feedback.          
     
+<br/><br/>
 
+## Percolation
+![View](./Grades/percolation.png).
 
         
     
