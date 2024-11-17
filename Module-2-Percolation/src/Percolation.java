@@ -7,34 +7,53 @@ public class Percolation {
     private WeightedQuickUnionUF ufBack; // for isFull()
     private final int n;
     private final int topIndex, bottomIndex;
-    private int openCount=0;
+    private int openCount;
 
     public Percolation(int n){
         if (n<=0) throw new java.lang.IllegalArgumentException();
-        this.n= n;
-        topIndex= 0;
-        bottomIndex= n*n+1;
-        uf= new WeightedQuickUnionUF(n*n+2);
-        ufBack= new WeightedQuickUnionUF(n*n+1); //without bottom index
+        this.n = n;
+        topIndex = 0;
+        bottomIndex = n*n+1;
+        openCount=0;
+        uf = new WeightedQuickUnionUF(n*n+1);//without bottom index
+        ufBack = new WeightedQuickUnionUF(n*n+2);
         isOpen = new boolean[n*n+2];
-        isOpen[topIndex]=true;
-        isOpen[bottomIndex]=true;
+        isOpen[topIndex] = true;
+        isOpen[bottomIndex] = true;
 
+    }
+
+    private boolean isValid(int row, int col){
+        if (row < 1 || row > n) {
+            throw new IllegalArgumentException("Row is out of bounds.");
+
+        }
+        if (col < 1 || col > n) {
+            throw new IllegalArgumentException("Column is out of bounds.");
+        }
+        return true;
     }
 
     private int indexOf(int row, int col) {
         // check bounds
         if (row < 1 || row > n) {
-            throw new IndexOutOfBoundsException("Row is out of bounds.");
+            throw new IllegalArgumentException("Row is out of bounds.");
         }
         if (col < 1 || col > n) {
-            throw new IndexOutOfBoundsException("Column is out of bounds.");
+            throw new IllegalArgumentException("Column is out of bounds.");
         }
-        return (row - 1) * n + col;// index
+        return (row - 1) * n + col; // index
     }
 
 
     public void open(int row, int col) {
+
+        if (row < 1 || row > n) {
+            throw new  IllegalArgumentException("Row is out of bounds.");
+        }
+        if (col < 1 || col > n) {
+            throw new IllegalArgumentException("Column is out of bounds.");
+        }
         int currIndex = indexOf(row, col);
         isOpen[currIndex] = true;
         openCount++;
@@ -53,13 +72,20 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col) {
+        if (row < 1 || row > n) {
+            throw new IllegalArgumentException("Row is out of bounds.");
+        }
+        if (col < 1 || col > n) {
+            throw new IllegalArgumentException("Column is out of bounds.");
+        }
         return isOpen[indexOf(row, col)];
     }
 
     private void tryUnion(int rowA, int colA, int rowB, int colB) {
+
         // I assume that (rowA, colA) is correct.
         if (0 < rowB && rowB <= n && 0 < colB && colB <= n
-                && isOpen(rowB, colB)) {
+                && isOpen(rowA, colA)) {
             ufBack.union(indexOf(rowA, colA), indexOf(rowB, colB));
             uf.union(indexOf(rowA, colA), indexOf(rowB, colB));
         }
@@ -69,14 +95,19 @@ public class Percolation {
         return openCount;
     }
 
-    //is the site (row, col) full?
+    // is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        return uf.connected(topIndex, indexOf(row, col));
+        isValid(row, col);
+        return uf.find(topIndex)==uf.find(indexOf(row, col));
     }
 
-    //does the system percolate?
+    // does the system percolate?
     public boolean percolates() {
-        return ufBack.connected(topIndex, bottomIndex);
+        return ufBack.find(topIndex)== ufBack.find( bottomIndex);
+    }
+
+    public static void main(String [] args){
+
     }
 
 }
