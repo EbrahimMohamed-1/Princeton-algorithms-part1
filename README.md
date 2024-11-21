@@ -28,7 +28,7 @@ Solve computational problems using the techniques learned throughout the course.
 <br/><br/>
 
 ## Percolation
-![View](./Grades/percolation.png).
+![Percolation](./Grades/Module2/Programming%20Assignment/percolation.png)
 
         
     
